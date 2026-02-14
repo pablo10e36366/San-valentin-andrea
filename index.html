@@ -443,6 +443,11 @@
 <body>
   <div class="glow"></div>
 
+  <!-- ✅ AUDIO (pon tu archivo musica.mp3 en la misma carpeta) -->
+  <audio id="musicaFondo" loop preload="auto">
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+
   <!-- ===== VISTA 1 ===== -->
   <div class="view" id="view1">
     <div class="card" id="card">
@@ -657,7 +662,6 @@
       credits.classList.remove("show");
       walkWrap.style.transition = "none";
       walkWrap.style.transform = "translateX(-10%)";
-      // force reflow
       void walkWrap.offsetWidth;
       walkWrap.style.transition = "transform 3.2s linear";
     }
@@ -669,32 +673,26 @@
       resetCinemaState();
       walkWrap.classList.add("show");
 
-      // 1) CAMINAR HACIA EL CENTRO
       walkWrap.style.transform = "translateX(205%)";
 
-      // 2) PARAR EN EL CENTRO
       cinemaTimer = setTimeout(()=>{
         walkWrap.classList.add("paused");
 
-        // 3) BESO (acercar caritas) + corazón gigante + créditos
         setTimeout(()=>{
           walkWrap.classList.add("kiss");
           bigHeart.classList.add("show");
           credits.classList.add("show");
         }, 250);
 
-        // 4) Mantener “escena” un ratito y luego seguir caminando
         setTimeout(()=>{
           credits.classList.remove("show");
           bigHeart.classList.remove("show");
           walkWrap.classList.remove("kiss");
           walkWrap.classList.remove("paused");
 
-          // continuar caminando a la derecha
           walkWrap.style.transition = "transform 2.6s linear";
           walkWrap.style.transform = "translateX(340%)";
 
-          // 5) reiniciar loop
           setTimeout(()=>{
             loopRunning = false;
             runCinemaLoop();
@@ -727,6 +725,17 @@
     }
 
     yesBtn.addEventListener("click", ()=>{
+
+      // ✅ MÚSICA: se reproduce cuando ella presiona "Sí"
+      const musica = document.getElementById("musicaFondo");
+      if(musica){
+        musica.volume = 0.8; // ajusta 0.0 a 1.0
+        const playPromise = musica.play();
+        if(playPromise && typeof playPromise.catch === "function"){
+          playPromise.catch(()=>{ /* si el navegador bloquea, no rompe nada */ });
+        }
+      }
+
       miniText.textContent = "Sabía que dirías que sí 🥹💘";
       document.getElementById("card").animate([
         { transform:"scale(1) translateY(0px)" },
