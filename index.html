@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>San Valentín 💘</title>
+  <style>
+    :root{
+      --bg1:#0f1020;
+      --bg2:#2b0a3d;
+      --text:#ffffff;
+      --muted:#d7d7e6;
+      --accent:#ff4d8d;
+      --accent2:#a855f7;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      overflow:hidden;
+      background:
+        radial-gradient(1100px 700px at 20% 20%, #ff4d8d22 0%, transparent 60%),
+        radial-gradient(900px 600px at 80% 30%, #a855f722 0%, transparent 55%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+    }
+
+    .glow{
+      position:fixed; inset:-100px;
+      background: radial-gradient(circle at 30% 30%, #ff4d8d1a 0%, transparent 60%),
+                  radial-gradient(circle at 70% 40%, #a855f71a 0%, transparent 60%),
+                  radial-gradient(circle at 55% 80%, #34d39912 0%, transparent 55%);
+      filter: blur(20px);
+      animation: floatGlow 10s ease-in-out infinite alternate;
+      pointer-events:none;
+      z-index:0;
+    }
+    @keyframes floatGlow{
+      from{ transform: translate3d(-10px, -8px,0) scale(1); }
+      to  { transform: translate3d(12px, 10px,0) scale(1.04); }
+    }
+
+    /* ====== VISTAS ====== */
+    .view{
+      position:fixed;
+      inset:0;
+      display:grid;
+      place-items:center;
+      padding:24px;
+      z-index:2;
+    }
+    .hidden{ display:none !important; }
+
+    /* ====== CARD (pantalla 1) ====== */
+    .card{
+      width:min(560px, 92vw);
+      border-radius:28px;
+      background: linear-gradient(180deg, #ffffff12, #ffffff0f);
+      border:1px solid #ffffff1f;
+      box-shadow: 0 30px 80px #00000055;
+      backdrop-filter: blur(10px);
+      padding:28px 22px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .top-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#ffffff14;
+      border:1px solid #ffffff1f;
+      color:var(--muted);
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .pulse-dot{
+      width:10px; height:10px;
+      border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 0 0 #ff4d8d66;
+      animation:pulse 1.4s infinite;
+    }
+    @keyframes pulse{
+      0%{ box-shadow:0 0 0 0 #ff4d8d66; transform:scale(1); }
+      70%{ box-shadow:0 0 0 14px #ff4d8d00; transform:scale(1.05); }
+      100%{ box-shadow:0 0 0 0 #ff4d8d00; transform:scale(1); }
+    }
+
+    h1{
+      margin:16px 0 8px;
+      font-size: clamp(28px, 4.5vw, 44px);
+      line-height:1.1;
+      letter-spacing:-.8px;
+    }
+    .name{
+      background: linear-gradient(90deg, var(--accent), #ffb3d1, var(--accent2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:800;
+    }
+
+    .sub{
+      margin:0 auto 18px;
+      max-width:46ch;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.45;
+    }
+
+    .heart{
+      font-size:52px;
+      display:inline-block;
+      margin:6px 0 10px;
+      animation: heartBeat 1.25s ease-in-out infinite;
+      filter: drop-shadow(0 10px 24px #ff4d8d25);
+    }
+    @keyframes heartBeat{
+      0%,100%{ transform:scale(1); }
+      50%{ transform:scale(1.18) rotate(-3deg); }
+    }
+
+    .buttons{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-top:14px;
+      flex-wrap:wrap;
+      position:relative;
+      min-height:64px;
+    }
+
+    button{
+      border:0;
+      border-radius:16px;
+      padding:14px 18px;
+      font-size:16px;
+      font-weight:700;
+      cursor:pointer;
+      transition: transform .12s ease, filter .2s ease;
+      user-select:none;
+    }
+    button:active{ transform: translateY(1px) scale(.99); }
+
+    .btn-yes{
+      background: linear-gradient(180deg, #34d399, #10b981);
+      color:#062215;
+      box-shadow: 0 18px 30px #10b98133;
+    }
+    .btn-yes:hover{ filter: brightness(1.05); }
+
+    .btn-no{
+      background: linear-gradient(180deg, #fb7185, #f43f5e);
+      color:#2a0710;
+      box-shadow: 0 18px 30px #f43f5e2e;
+      position:relative;
+    }
+
+    .note{
+      margin-top:14px;
+      font-size:13px;
+      color:#ffffffb5;
+      opacity:.9;
+    }
+
+    .footer{
+      margin-top:16px;
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      color:#ffffff9e;
+      font-size:12.5px;
+    }
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      background:#ffffff10;
+      border:1px solid #ffffff1c;
+    }
+
+    .typewriter{
+      display:inline-block;
+      white-space:nowrap;
+      border-right:2px solid #ffffffaa;
+      padding-right:6px;
+      animation: caret 0.9s steps(1) infinite;
+      max-width: 100%;
+      overflow:hidden;
+      vertical-align:bottom;
+    }
+    @keyframes caret{
+      50%{ border-right-color: transparent; }
+    }
+
+    /* ====== PANTALLA 2 (cinemática) ====== */
+    #rain{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:10;
+      overflow:hidden;
+    }
+    .falling{
+      position:absolute;
+      top:-12vh;
+      opacity:.95;
+      filter: drop-shadow(0 10px 18px #ff4d8d1f);
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+    }
+    @keyframes fall{
+      from{ transform: translateY(-12vh) rotate(0deg); opacity: 0.0; }
+      10%{ opacity: .95; }
+      to  { transform: translateY(112vh) rotate(360deg); opacity: 0.1; }
+    }
+
+    .cinema{
+      width:min(920px, 95vw);
+      height:min(520px, 70vh);
+      border-radius:28px;
+      background: linear-gradient(180deg, #ffffff12, #ffffff0a);
+      border:1px solid #ffffff1f;
+      box-shadow: 0 40px 100px #00000065;
+      backdrop-filter: blur(10px);
+      position:relative;
+      overflow:hidden;
+      padding:22px;
+      z-index:20;
+    }
+
+    .cinema::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 300px at 30% 30%, #ff4d8d1a 0%, transparent 60%),
+        radial-gradient(700px 300px at 70% 40%, #a855f71a 0%, transparent 60%);
+      pointer-events:none;
+    }
+
+    .cinema-header{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      margin-top:6px;
+    }
+    .cinema-title{
+      margin:0;
+      font-size: clamp(26px, 4.5vw, 44px);
+      letter-spacing:-.8px;
+    }
+    .cinema-sub{
+      margin:8px auto 0;
+      max-width:65ch;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:15.5px;
+    }
+
+    .stage{
+      position:absolute;
+      left:0; right:0;
+      bottom:0;
+      height:64%;
+      z-index:2;
+    }
+
+    .ground{
+      position:absolute;
+      left:-20%;
+      right:-20%;
+      bottom:0;
+      height:42%;
+      background: radial-gradient(900px 220px at 50% 20%, #ffffff18 0%, transparent 70%),
+                  linear-gradient(180deg, #ffffff10, #ffffff05);
+      border-top:1px solid #ffffff14;
+    }
+
+    /* Grupo caminando */
+    .walk-wrap{
+      position:absolute;
+      bottom:22%;
+      left:-30%;
+      width: 340px;
+      height: 240px;
+      filter: drop-shadow(0 18px 30px #00000035);
+      /* Controlamos con JS: caminar -> parar al centro -> beso -> continuar */
+      transform: translateX(-10%);
+      opacity:0;
+      transition: opacity .35s ease;
+    }
+    .walk-wrap.show{ opacity:1; }
+
+    /* Bobbing (caminar) */
+    .bobbing{
+      animation: bob 0.55s ease-in-out infinite;
+      transform-origin: 50% 90%;
+    }
+    .walk-wrap.paused .bobbing{
+      animation-play-state: paused;
+    }
+    @keyframes bob{
+      0%,100%{ transform: translateY(0px); }
+      50%{ transform: translateY(-4px); }
+    }
+
+    /* SVG estilo “dibujo” */
+    svg{ width:100%; height:100%; }
+    .stroke{
+      stroke:#ffffff;
+      stroke-width:6;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      fill:none;
+      opacity:.92;
+    }
+    .stroke2{
+      stroke:#ffffffcc;
+      stroke-width:5;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      fill:none;
+      opacity:.9;
+    }
+    .fill-heart{ fill:#ff4d8d; opacity:.95; }
+
+    /* Piernas (caminar) */
+    .legL, .legR{
+      transform-box: fill-box;
+      transform-origin: 50% 0%;
+    }
+    .legL{ animation: legSwingL .55s ease-in-out infinite; }
+    .legR{ animation: legSwingR .55s ease-in-out infinite; }
+    .walk-wrap.paused .legL,
+    .walk-wrap.paused .legR{
+      animation-play-state: paused;
+    }
+    @keyframes legSwingL{
+      0%,100%{ transform: rotate(16deg); }
+      50%{ transform: rotate(-16deg); }
+    }
+    @keyframes legSwingR{
+      0%,100%{ transform: rotate(-16deg); }
+      50%{ transform: rotate(16deg); }
+    }
+
+    /* Beso: acercar caritas */
+    .faceL, .faceR{
+      transition: transform .6s ease;
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+    }
+    .walk-wrap.kiss .faceL{ transform: translateX(10px); }
+    .walk-wrap.kiss .faceR{ transform: translateX(-10px); }
+
+    /* CORAZÓN GIGANTE */
+    .big-heart{
+      position:absolute;
+      left:50%;
+      top:52%;
+      transform: translate(-50%,-50%) scale(0.2);
+      font-size: 110px;
+      opacity:0;
+      z-index:5;
+      filter: drop-shadow(0 18px 28px #ff4d8d44);
+      transition: opacity .35s ease;
+    }
+    .big-heart.show{
+      opacity:1;
+      animation: bigHeartPop 1.1s ease-out forwards;
+    }
+    @keyframes bigHeartPop{
+      0%{ transform: translate(-50%,-50%) scale(0.2); }
+      55%{ transform: translate(-50%,-50%) scale(1.25); }
+      100%{ transform: translate(-50%,-50%) scale(1.0); }
+    }
+
+    /* FIN + CRÉDITOS */
+    .credits{
+      position:absolute;
+      left:50%;
+      top:18%;
+      transform: translateX(-50%);
+      text-align:center;
+      z-index:6;
+      opacity:0;
+      transition: opacity .5s ease;
+      pointer-events:none;
+    }
+    .credits.show{ opacity:1; }
+    .credits .fin{
+      font-size: clamp(34px, 6vw, 60px);
+      font-weight:900;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ffffff, #ffb3d1, #d8b4fe);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow: 0 10px 30px #00000055;
+      margin:0;
+    }
+    .credits .by{
+      margin:10px 0 0;
+      color: var(--muted);
+      font-weight:700;
+      font-size: 16px;
+      letter-spacing:.4px;
+    }
+
+    .back-btn{
+      position:absolute;
+      right:16px;
+      top:16px;
+      z-index:7;
+      background:#ffffff18;
+      border:1px solid #ffffff2a;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    @media (max-width:420px){
+      .card{ padding:22px 16px; border-radius:22px; }
+      button{ width: 100%; max-width: 260px; }
+      .buttons{ min-height: 120px; }
+      .cinema{ height:min(520px, 76vh); }
+      .walk-wrap{ width: 300px; height: 220px; bottom:20%; }
+      .big-heart{ font-size: 92px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow"></div>
+
+  <!-- ===== VISTA 1 ===== -->
+  <div class="view" id="view1">
+    <div class="card" id="card">
+      <div class="top-badge">
+        <span class="pulse-dot"></span>
+        <span id="miniText">Tengo una pregunta para ti mi amor</span>
+      </div>
+
+      <div class="heart" aria-hidden="true">💗</div>
+
+      <h1>
+        <span class="name">Andrea</span>,<br/>
+        ¿quieres ser mi San Valentín?
+      </h1>
+
+      <p class="sub">
+        <span id="tw" class="typewriter"></span>
+      </p>
+
+      <div class="buttons" id="btnArea">
+        <button class="btn-yes" id="yesBtn">Sí, obvio 💘</button>
+        <button class="btn-no" id="noBtn">No 😅</button>
+      </div>
+
+      <div class="note">Pista: si intentas decir “No”… puede que el botón tenga miedo 😳</div>
+
+      <div class="footer">
+        <span class="pill">💌 Te amo mi amor y espero que te guste</span>
+        <span class="pill">✨ Erees todo lo que quiero</span>
+        <span class="pill">🫶 Solo para ti mi amor</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VISTA 2: CINEMÁTICA + BESO + CORAZÓN + CRÉDITOS ===== -->
+  <div class="view hidden" id="view2">
+    <div id="rain"></div>
+
+    <div class="cinema">
+      <button class="back-btn" id="backBtn">Volver 💞</button>
+
+      <div class="cinema-header">
+        <h2 class="cinema-title">Nuestro camino juntos💖</h2>
+        <p class="cinema-sub">
+          Andrea mi amor, quiero seguir caminando juntitos de la mano y quiero seguir compartiendo momentos como este, y muchos mas, te amo infinitamente🥹
+          <br/>Que lluevan corazoncitos jaja  🌹
+        </p>
+      </div>
+
+      <div class="credits" id="credits">
+        <h3 class="fin">FIN</h3>
+        <p class="by">Créditos: <b>con mucho amor para andrea att tu amorcito jaja</b> 🎬</p>
+      </div>
+
+      <div class="big-heart" id="bigHeart">💘</div>
+
+      <div class="stage">
+        <div class="ground"></div>
+
+        <div class="walk-wrap" id="walkWrap">
+          <div class="bobbing">
+            <svg viewBox="0 0 360 260" aria-hidden="true">
+              <!-- corazón pequeño arriba -->
+              <path class="fill-heart" d="M180 48
+                C180 36, 196 30, 206 40
+                C216 50, 210 66, 180 82
+                C150 66, 144 50, 154 40
+                C164 30, 180 36, 180 48Z"/>
+
+              <!-- Personita izquierda -->
+              <g class="faceL">
+                <circle class="stroke" cx="120" cy="90" r="24"/>
+                <path class="stroke2" d="M110 88 C118 98, 130 98, 138 88" />
+              </g>
+              <path class="stroke" d="M120 115 L120 168" />
+              <path class="stroke" d="M120 140 L154 150" />
+              <path class="stroke" d="M120 140 L96 156" />
+              <path class="stroke legL" d="M120 168 L102 214" />
+              <path class="stroke legR" d="M120 168 L136 214" />
+
+              <!-- Personita derecha -->
+              <g class="faceR">
+                <circle class="stroke" cx="240" cy="90" r="24"/>
+                <path class="stroke2" d="M230 88 C238 98, 250 98, 258 88" />
+              </g>
+              <path class="stroke" d="M240 115 L240 172" />
+              <path class="stroke" d="M240 142 L206 152" />
+              <path class="stroke" d="M240 142 L268 160" />
+              <path class="stroke legR" d="M240 172 L224 218" />
+              <path class="stroke legL" d="M240 172 L258 218" />
+
+              <!-- manitos juntas -->
+              <circle cx="180" cy="152" r="7" fill="#ffffffdd"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== Typewriter =====
+    const lines = [
+      "Te invito a un San Valentín bonito, sin presión…",
+      "pero con muchos besitos 😄💋",
+      "¿Aceptas? 🫶"
+    ];
+    const tw = document.getElementById("tw");
+    let li = 0, ci = 0;
+    (function typeLoop(){
+      if(li >= lines.length) return;
+      const current = lines[li];
+      tw.textContent = current.slice(0, ci++);
+      if(ci <= current.length){
+        setTimeout(typeLoop, 40);
+      } else {
+        li++; ci = 0;
+        setTimeout(typeLoop, 700);
+      }
+    })();
+
+    // ===== Botón NO se escapa =====
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const btnArea = document.getElementById("btnArea");
+    const miniText = document.getElementById("miniText");
+    let noMoves = 0;
+
+    function moveNoButton(){
+      noMoves++;
+      const rect = btnArea.getBoundingClientRect();
+      const padding = 6;
+      const maxX = rect.width - noBtn.offsetWidth - padding;
+      const maxY = rect.height - noBtn.offsetHeight - padding;
+
+      if(maxX < 10 || maxY < 10){
+        noBtn.animate([
+          { transform: "translateX(0px)" },
+          { transform: "translateX(-10px)" },
+          { transform: "translateX(10px)" },
+          { transform: "translateX(0px)" },
+        ], { duration: 250 });
+        return;
+      }
+
+      const x = Math.random() * maxX + padding;
+      const y = Math.random() * maxY + padding;
+
+      noBtn.style.position = "absolute";
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top  = `${y}px`;
+
+      const msgs = [
+        "Esa opción no existe 😌",
+        "Intenta otra vez 😳",
+        "Andrea, piénsalo bien 😅",
+        "Uy… se movió solito 😭",
+        "Ok pero… ¿y si sí? 💘"
+      ];
+      miniText.textContent = msgs[Math.min(noMoves-1, msgs.length-1)];
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNoButton(); }, { passive:false });
+    noBtn.addEventListener("click", ()=> moveNoButton());
+
+    // ===== Pantalla 2: lluvia + cinemática con beso + fin/créditos =====
+    const view1 = document.getElementById("view1");
+    const view2 = document.getElementById("view2");
+    const rain = document.getElementById("rain");
+    const backBtn = document.getElementById("backBtn");
+
+    const walkWrap = document.getElementById("walkWrap");
+    const bigHeart = document.getElementById("bigHeart");
+    const credits = document.getElementById("credits");
+
+    let rainTimer = null;
+    let cinemaTimer = null;
+    let loopRunning = false;
+
+    function startRain(){
+      stopRain();
+      const emojis = ["💖","💗","💘","💕","💞","❤️","🌹","🌹","🌹"];
+      rainTimer = setInterval(()=>{
+        const el = document.createElement("div");
+        el.className = "falling";
+        el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+
+        const left = Math.random() * 100;
+        const size = 16 + Math.random()*26;
+        const duration = 3.2 + Math.random()*4.2;
+
+        el.style.left = left + "vw";
+        el.style.fontSize = size + "px";
+        el.style.animationDuration = duration + "s";
+        el.style.opacity = (0.65 + Math.random()*0.35).toFixed(2);
+
+        rain.appendChild(el);
+        setTimeout(()=> el.remove(), duration*1000 + 200);
+      }, 110);
+    }
+
+    function stopRain(){
+      if(rainTimer) clearInterval(rainTimer);
+      rainTimer = null;
+      rain.innerHTML = "";
+    }
+
+    function resetCinemaState(){
+      walkWrap.classList.remove("paused", "kiss", "show");
+      bigHeart.classList.remove("show");
+      credits.classList.remove("show");
+      walkWrap.style.transition = "none";
+      walkWrap.style.transform = "translateX(-10%)";
+      // force reflow
+      void walkWrap.offsetWidth;
+      walkWrap.style.transition = "transform 3.2s linear";
+    }
+
+    function runCinemaLoop(){
+      if(loopRunning) return;
+      loopRunning = true;
+
+      resetCinemaState();
+      walkWrap.classList.add("show");
+
+      // 1) CAMINAR HACIA EL CENTRO
+      walkWrap.style.transform = "translateX(205%)";
+
+      // 2) PARAR EN EL CENTRO
+      cinemaTimer = setTimeout(()=>{
+        walkWrap.classList.add("paused");
+
+        // 3) BESO (acercar caritas) + corazón gigante + créditos
+        setTimeout(()=>{
+          walkWrap.classList.add("kiss");
+          bigHeart.classList.add("show");
+          credits.classList.add("show");
+        }, 250);
+
+        // 4) Mantener “escena” un ratito y luego seguir caminando
+        setTimeout(()=>{
+          credits.classList.remove("show");
+          bigHeart.classList.remove("show");
+          walkWrap.classList.remove("kiss");
+          walkWrap.classList.remove("paused");
+
+          // continuar caminando a la derecha
+          walkWrap.style.transition = "transform 2.6s linear";
+          walkWrap.style.transform = "translateX(340%)";
+
+          // 5) reiniciar loop
+          setTimeout(()=>{
+            loopRunning = false;
+            runCinemaLoop();
+          }, 2800);
+
+        }, 2100);
+
+      }, 3300);
+    }
+
+    function stopCinemaLoop(){
+      if(cinemaTimer) clearTimeout(cinemaTimer);
+      cinemaTimer = null;
+      loopRunning = false;
+    }
+
+    function goToCinema(){
+      view1.classList.add("hidden");
+      view2.classList.remove("hidden");
+      startRain();
+      runCinemaLoop();
+    }
+
+    function goBack(){
+      stopRain();
+      stopCinemaLoop();
+      view2.classList.add("hidden");
+      view1.classList.remove("hidden");
+      miniText.textContent = "Tengo una pregunta importante…";
+    }
+
+    yesBtn.addEventListener("click", ()=>{
+      miniText.textContent = "Sabía que dirías que sí 🥹💘";
+      document.getElementById("card").animate([
+        { transform:"scale(1) translateY(0px)" },
+        { transform:"scale(1.03) translateY(-3px)" },
+        { transform:"scale(1) translateY(0px)" }
+      ], { duration: 420, easing:"ease-out" });
+
+      setTimeout(goToCinema, 350);
+    });
+
+    backBtn.addEventListener("click", goBack);
+  </script>
+</body>
+</html>
