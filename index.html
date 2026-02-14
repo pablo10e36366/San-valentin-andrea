@@ -383,17 +383,19 @@
     }
 
     /* FIN + CRÉDITOS */
-    .credits{
-      position:absolute;
-      left:50%;
-      top:18%;
-      transform: translateX(-50%);
-      text-align:center;
-      z-index:6;
-      opacity:0;
-      transition: opacity .5s ease;
-      pointer-events:none;
-    }
+       .credits{
+  position:absolute;
+  left:50%;
+  bottom:20px; /* 👈 casi al final abajo */
+  transform: translateX(-50%);
+  text-align:center;
+  z-index:6;
+  opacity:0;
+  transition: opacity .5s ease;
+  pointer-events:none;
+}
+
+
     .credits.show{ opacity:1; }
     .credits .fin{
       font-size: clamp(34px, 6vw, 60px);
@@ -551,8 +553,8 @@
   <script>
     // ===== Typewriter =====
     const lines = [
-      "Te invito a un San Valentín bonito, sin presión…",
-      "pero con muchos besitos 😄💋",
+      "Te invito a un San Valentín bonito, con mucho amor",
+      "y con muchos besitos 😄💋",
       "¿Aceptas? 🫶"
     ];
     const tw = document.getElementById("tw");
